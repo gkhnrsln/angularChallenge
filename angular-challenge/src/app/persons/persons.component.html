@@ -1,0 +1,27 @@
+<h2>Table of Persons</h2>
+
+<div class="container">
+  <div class="left">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Birthday</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let person of persons">
+        <td>{{ person.firstName }}</td>
+        <td>{{ person.lastName }}</td>
+        <td>{{ person.birthday }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="right">
+    <app-persons-form [persons]="persons"></app-persons-form>
+  </div>
+
+</div>
+
