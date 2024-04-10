@@ -13,10 +13,10 @@ export class PersonsComponent implements OnInit {
   constructor(private personService: PersonService) { }
 
   ngOnInit(): void {
-    this.personService.getPersons().subscribe(data => {
-      data.forEach((person: Person) => {
+    this.personService.getPersons().subscribe(persons => {
+      persons.forEach((person: Person) => {
         if (person.firstName && person.firstName.length > 0) {
-          this.persons = data
+          this.persons = persons
             .filter((person: Person) => person && person.firstName)
             .sort((a: { firstName: string; }, b: { firstName: string; }) => {
               return a.firstName.localeCompare(b.firstName);
