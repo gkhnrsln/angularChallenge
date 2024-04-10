@@ -14,7 +14,7 @@
       <tr *ngFor="let person of persons">
         <td>{{ person.firstName }}</td>
         <td>{{ person.lastName }}</td>
-        <td>{{ person.birthday }}</td>
+        <td>{{ person.birthday | date}}</td>
       </tr>
       </tbody>
     </table>
