@@ -8,6 +8,7 @@
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Birthday</th>
+        <th>Action</th>
       </tr>
       </thead>
       <tbody>
@@ -15,6 +16,7 @@
         <td>{{ person.firstName }}</td>
         <td>{{ person.lastName }}</td>
         <td>{{ person.birthday | date}}</td>
+        <td><button class="btn btn-danger" (click)="deletePerson(person)">Delete</button></td>
       </tr>
       </tbody>
     </table>

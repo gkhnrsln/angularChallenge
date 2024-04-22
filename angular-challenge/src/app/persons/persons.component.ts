@@ -19,4 +19,11 @@ export class PersonsComponent implements OnInit {
         .sort((a: Person, b: Person) => a.firstName.localeCompare(b.firstName));
         });
   }
+
+  deletePerson(person: Person) {
+    const index = this.persons.indexOf(person);
+    if (index > -1) {
+      this.persons.splice(index, 1);
+    }
+  }
 }

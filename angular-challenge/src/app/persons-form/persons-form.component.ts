@@ -21,7 +21,7 @@ export class PersonsFormComponent {
 
   onSubmit() {
     if (this.myForm.valid) {
-      const newPerson=  {
+      const newPerson =  {
         firstName: this.myForm.value.firstName,
         lastName: this.myForm.value.lastName,
         birthday: this.myForm.value.birthday
