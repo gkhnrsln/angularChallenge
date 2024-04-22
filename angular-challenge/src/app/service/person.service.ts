@@ -11,6 +11,6 @@ export class PersonService {
   constructor(private http: HttpClient) { }
 
   getPersons(): Observable<Person[]> {
-    return this.http.get<Person[]>('https://aracom.de/api/persons.php');
+    return this.http.get<Person[]>('./assets/persons.json');
   }
 }
