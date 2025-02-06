@@ -17,15 +17,13 @@ import { DatePipe, AsyncPipe} from "@angular/common";
     ]
 })
 export class PersonListComponent implements OnInit {
-  title = 'Table of Persons';
-  
   private readonly personService = inject(PersonService);
   persons$: Observable<Person[]>;
-
   persons: Person[] = [];
+  title = 'Table of Persons';
 
   constructor() {
-    this.persons$ = this.personService.getPersons();
+    this.persons$ = this.personService.getAll();
    }
 
   ngOnInit(): void {
