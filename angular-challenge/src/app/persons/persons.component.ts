@@ -3,9 +3,10 @@ import {Person} from "../model/person";
 import {PersonService} from "../service/person.service";
 
 @Component({
-  selector: 'app-persons',
-  templateUrl: './persons.component.html',
-  styleUrls: ['./persons.component.scss']
+    selector: 'app-persons',
+    templateUrl: './persons.component.html',
+    styleUrls: ['./persons.component.scss'],
+    standalone: false
 })
 export class PersonsComponent implements OnInit {
   persons: Person[] = [];

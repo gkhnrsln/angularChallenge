@@ -3,9 +3,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Person} from "../model/person";
 
 @Component({
-  selector: 'app-persons-form',
-  templateUrl: './persons-form.component.html',
-  styleUrls: ['./persons-form.component.scss']
+    selector: 'app-persons-form',
+    templateUrl: './persons-form.component.html',
+    styleUrls: ['./persons-form.component.scss'],
+    standalone: false
 })
 export class PersonsFormComponent {
   @Input() persons: Person[] = [];
