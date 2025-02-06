@@ -1,0 +1,31 @@
+<h1 class="mt-5">{{title}}</h1>
+@if (persons$ | async; as persons) {
+  <div class="container">
+    <div class="left">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Birthday</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (person of persons; track person) {
+            <tr>
+              <td>{{ person.firstName }}</td>
+              <td>{{ person.lastName }}</td>
+              <td>{{ person.birthday | date}}</td>
+              <td><button class="btn btn-danger" (click)="deletePerson(person)">Delete</button></td>         
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="right">
+      <app-persons-form [persons]="persons"></app-persons-form>
+    </div>
+  
+  </div>  
+}

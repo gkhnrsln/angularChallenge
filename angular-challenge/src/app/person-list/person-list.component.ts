@@ -3,19 +3,22 @@ import {Person} from "../model/person";
 import {PersonService} from "../service/person.service";
 import { PersonsFormComponent } from '../persons-form/persons-form.component';
 import {Observable} from "rxjs";
-import { DatePipe } from '@angular/common';
+import { DatePipe, AsyncPipe} from "@angular/common";
 
 @Component({
     selector: 'app-persons',
-    templateUrl: './persons.component.html',
-    styleUrls: ['./persons.component.scss'],
+    templateUrl: './person-list.component.html',
+    styleUrls: ['./person-list.component.scss'],
     standalone: true,
     imports: [
       PersonsFormComponent,
-      DatePipe
+      DatePipe,
+      AsyncPipe
     ]
 })
-export class PersonsComponent implements OnInit {
+export class PersonListComponent implements OnInit {
+  title = 'Table of Persons';
+  
   private readonly personService = inject(PersonService);
   persons$: Observable<Person[]>;
 
