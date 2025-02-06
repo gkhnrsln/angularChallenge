@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
+import { inject, Injectable } from '@angular/core';
+import {catchError, Observable, of} from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import {Person} from "../model/person";
 
@@ -7,10 +7,14 @@ import {Person} from "../model/person";
   providedIn: 'root'
 })
 export class PersonService {
-
-  constructor(private http: HttpClient) { }
+  private readonly http = inject(HttpClient);
 
   getPersons(): Observable<Person[]> {
-    return this.http.get<Person[]>('./assets/persons.json');
+    return this.http.get<Person[]>('./assets/persons.json').pipe(
+      catchError(err => {
+        console.error('Error loading persons', err);
+        return of([]);
+      })
+    );
   }
 }
