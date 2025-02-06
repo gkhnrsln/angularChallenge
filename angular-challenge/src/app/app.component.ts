@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PersonsComponent } from './persons/persons.component';
+import { FooterComponent } from "./footer/footer.component";
 
 @Component({
     selector: 'app-root',
@@ -7,8 +8,9 @@ import { PersonsComponent } from './persons/persons.component';
     styleUrls: ['./app.component.scss'],
     standalone: true,
     imports: [
-      PersonsComponent,
-    ]
+    PersonsComponent,
+    FooterComponent
+]
 })
 export class AppComponent {
   title = 'Angular Challenge';
