@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { PersonsComponent } from './persons/persons.component';
 import { FooterComponent } from "./footer/footer.component";
+import { MenuComponent } from "./menu/menu.component";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -8,9 +9,10 @@ import { FooterComponent } from "./footer/footer.component";
     styleUrls: ['./app.component.scss'],
     standalone: true,
     imports: [
-    PersonsComponent,
-    FooterComponent
-]
+      FooterComponent,
+      MenuComponent,
+      RouterOutlet,
+    ]
 })
 export class AppComponent {
   title = 'Angular Challenge';
