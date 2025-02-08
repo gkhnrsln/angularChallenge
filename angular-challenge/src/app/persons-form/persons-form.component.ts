@@ -1,6 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Person} from "../model/person";
+import { PersonService } from '../service/person.service';
 
 @Component({
     selector: 'app-persons-form',
@@ -12,7 +13,8 @@ import {Person} from "../model/person";
     ]
 })
 export class PersonsFormComponent {
-  @Input() persons: Person[] = [];
+  private readonly personService = inject(PersonService);
+  
   myForm: FormGroup;
 
   constructor() {
@@ -25,12 +27,14 @@ export class PersonsFormComponent {
 
   onSubmit() {
     if (this.myForm.valid) {
-      const newPerson =  {
+      const newPerson: Person = {
+        id: Date.now(),
         firstName: this.myForm.value.firstName,
         lastName: this.myForm.value.lastName,
         birthday: this.myForm.value.birthday
       };
-      this.persons.push(newPerson);
+      this.personService.addPerson(newPerson);
+
       this.myForm.reset();
     }
   }

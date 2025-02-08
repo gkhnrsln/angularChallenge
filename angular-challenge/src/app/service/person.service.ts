@@ -1,24 +1,84 @@
-import { inject, Injectable } from '@angular/core';
-import {catchError, Observable, of} from "rxjs";
+import { inject, Injectable, signal, Signal } from '@angular/core';
+import { Observable, of} from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import {Person} from "../model/person";
+import { catchError, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonService {
-  // private apiUrl = 'https://api.example.com';
-
+  private readonly dataUrl = './assets/persons.json';
   private readonly http = inject(HttpClient);
+  private readonly _persons = signal<Person[]>([]);
 
-  getAll(): Observable<Person[]> {
-    return this.http.get<Person[]>('./assets/persons.json').pipe(
-      catchError(err => {
-        console.error('Error loading persons', err);
-        return of([]);
-      })
-    );
+  get persons(): Signal<Person[]> {
+    return this._persons.asReadonly();
   }
+
+  constructor() {
+    this.loadInitialData();
+  }
+
+  private loadInitialData() {
+    const storedData = sessionStorage.getItem('persons');
+  
+    if (storedData) {
+      this._persons.set(JSON.parse(storedData));
+    } else {
+      this.http.get<Person[]>(this.dataUrl).subscribe(persons => {
+        this.updateSessionStorage(persons);
+      });
+    }
+  }
+
+  getPersons(): Observable<Person[]> {
+    const storedDate = sessionStorage.getItem('persons');
+    if (storedDate) {
+      const persons = JSON.parse(storedDate);
+      this._persons.set(persons);
+      return of(persons);
+    } else {  
+      return this.http.get<Person[]>(this.dataUrl).pipe(
+        map(persons => {
+          this.updateSessionStorage(persons);
+          return persons;
+        }),
+        catchError(err => {
+          console.error(err);
+          return of([]);
+        })
+      )
+    };
+  }
+
+  addPerson(person: Person) {
+    const storedDate = sessionStorage.getItem('persons');
+    if (storedDate) {
+      const persons = JSON.parse(storedDate);
+      persons.push(person);
+      this.updateSessionStorage(persons);
+    }
+  }
+
+  deletePerson(id: number) {
+    const storedDate = sessionStorage.getItem('persons');
+    if (storedDate) {
+      const persons = JSON.parse(storedDate);
+      for(let i = 0; i < persons.length; i++) {
+        if(persons[i].id == id) {
+          persons.splice(i, 1);
+        }
+      }
+      this.updateSessionStorage(persons);
+    }
+  }
+
+  private updateSessionStorage(persons: Person[]): void {
+    sessionStorage.setItem('persons', JSON.stringify(persons));
+    this._persons.set(persons);
+  }
+
 
   /* 
   getAll(): Observable<Person[]> {
@@ -46,5 +106,4 @@ export class PersonService {
     return this.http.put<Person>(`${this.apiUrl}/persons/${person.id}`, person);
   }
   */
-
 }
