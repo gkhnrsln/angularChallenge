@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { QuotesService } from '../service/quotes.service';
+import { Observable } from 'rxjs';
+import { Quote } from '../model/quote';
+import { AsyncPipe } from "@angular/common";
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, AsyncPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-
+  private readonly quotesService = inject(QuotesService);
   title = 'Home';
+  quotes$: Observable<Quote[]>;
+
+  constructor() {
+    this.quotes$ = this.quotesService.getQuotes();
+  }
 
 }

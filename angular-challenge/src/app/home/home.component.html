@@ -16,8 +16,23 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-body">
-            <h3 class="card-title">Placeholder</h3>
-        
+            <h3 class="card-title">Random Quote</h3>
+            @if (quotes$ | async; as quotes) {
+              @for (quote of quotes; track quote.quote) {
+                <figure class="text-center mb-0">
+                  <blockquote class="blockquote">
+                    <p class="pb-3">
+                      <i class="fas fa-quote-left fa-xs text-primary"></i>
+                      <span class="lead font-italic">{{quote.quote}}</span>
+                      <i class="fas fa-quote-right fa-xs text-primary"></i>
+                    </p>
+                  </blockquote>
+                  <figcaption class="blockquote-footer mb-0">
+                    {{quote.author}}
+                  </figcaption>
+                </figure>
+              }
+            }
           </div>
         </div>
       </div>
