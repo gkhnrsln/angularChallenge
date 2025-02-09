@@ -4,7 +4,7 @@
       <div class="col">
         <h2>Add New Person</h2>
 
-        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="firstName">Firstname:</label>
             <input type="text" id="firstName" formControlName="firstName" class="form-control">
@@ -20,7 +20,7 @@
             <input type="date" id="birthday" formControlName="birthday" class="form-control">
           </div>
 
-          <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Submit</button>
+          <button type="submit" [disabled]="!personForm.valid" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>

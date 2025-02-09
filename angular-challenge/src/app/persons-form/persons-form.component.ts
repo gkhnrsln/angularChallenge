@@ -15,10 +15,10 @@ import { PersonService } from '../service/person.service';
 export class PersonsFormComponent {
   private readonly personService = inject(PersonService);
   
-  myForm: FormGroup;
+  personForm: FormGroup;
 
   constructor() {
-    this.myForm = new FormGroup({
+    this.personForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', [Validators.required]),
       birthday: new FormControl('', [Validators.required, this.validateBirthday])
@@ -26,16 +26,16 @@ export class PersonsFormComponent {
   }
 
   onSubmit() {
-    if (this.myForm.valid) {
+    if (this.personForm.valid) {
       const newPerson: Person = {
         id: Date.now(),
-        firstName: this.myForm.value.firstName,
-        lastName: this.myForm.value.lastName,
-        birthday: this.myForm.value.birthday
+        firstName: this.personForm.value.firstName,
+        lastName: this.personForm.value.lastName,
+        birthday: this.personForm.value.birthday
       };
       this.personService.addPerson(newPerson);
 
-      this.myForm.reset();
+      this.personForm.reset();
     }
   }
 
