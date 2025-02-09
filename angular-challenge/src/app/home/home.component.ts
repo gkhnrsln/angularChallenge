@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { QuotesService } from '../service/quotes.service';
+import { QuotesService } from '../shared/service/quotes.service';
 import { Observable } from 'rxjs';
 import { Quote } from '../model/quote';
 import { AsyncPipe } from "@angular/common";

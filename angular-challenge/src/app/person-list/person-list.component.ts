@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {PersonService} from "../service/person.service";
+import { PersonService } from "../shared/service/person.service";
 import { PersonsFormComponent } from '../persons-form/persons-form.component';
 import { DatePipe} from "@angular/common";
 

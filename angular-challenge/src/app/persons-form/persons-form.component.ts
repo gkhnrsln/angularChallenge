@@ -1,7 +1,8 @@
 import {Component, inject } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Person} from "../model/person";
-import { PersonService } from '../service/person.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { Person } from "../model/person";
+import { PersonService } from '../shared/service/person.service';
+import { birthdayValidator } from '../shared/validators/birthdayValidator';
 
 @Component({
     selector: 'app-persons-form',
@@ -22,7 +23,7 @@ export class PersonsFormComponent {
     this.personForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      birthday: ['', [Validators.required, this.validateBirthday]]
+      birthday: ['', [Validators.required, birthdayValidator()]]
     });
   }
 
@@ -38,15 +39,5 @@ export class PersonsFormComponent {
 
       this.personForm.reset();
     }
-  }
-
-  validateBirthday(control: FormControl): { [key: string]: any } | null {
-    const selectedDate = new Date(control.value);
-    const currentDate = new Date();
-
-    if (selectedDate >= currentDate) {
-      return { futureDate: true };
-    }
-    return null;
   }
 }
