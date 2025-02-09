@@ -13,8 +13,6 @@ export class QuotesService {
   private readonly apiKey = environment.apiKey;
   
   private readonly http = inject(HttpClient);
-  
-  constructor() { }
 
   getQuotes(): Observable<Quote[]> {
     const headers = new HttpHeaders({
