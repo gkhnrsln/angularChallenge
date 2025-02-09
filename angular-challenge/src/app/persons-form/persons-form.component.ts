@@ -1,5 +1,5 @@
 import {Component, inject } from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Person} from "../model/person";
 import { PersonService } from '../service/person.service';
 
@@ -14,14 +14,15 @@ import { PersonService } from '../service/person.service';
 })
 export class PersonsFormComponent {
   private readonly personService = inject(PersonService);
-  
+  private readonly formBuilder = inject(FormBuilder);
+
   personForm: FormGroup;
 
   constructor() {
-    this.personForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', [Validators.required]),
-      birthday: new FormControl('', [Validators.required, this.validateBirthday])
+    this.personForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthday: ['', [Validators.required, this.validateBirthday]]
     });
   }
 
