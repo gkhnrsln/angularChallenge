@@ -14,13 +14,7 @@
         </thead>
         <tbody>
           @for (person of persons(); track person.id) {
-            <tr>
-              <td>{{ person.id }}</td>
-              <td>{{ person.firstName }}</td>
-              <td>{{ person.lastName }}</td>
-              <td>{{ person.birthday | date}}</td>
-              <td><button class="btn btn-danger" (click)="deletePerson(person.id)">Delete</button></td>         
-            </tr>
+            <tr app-person-list-item [person]="person"></tr>  
           }
         </tbody>
       </table>
@@ -28,6 +22,5 @@
     <div class="right">
       <app-persons-form></app-persons-form>
     </div>
-  
   </div>  
 }

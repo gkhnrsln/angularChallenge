@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PersonService } from "../shared/service/person.service";
 import { PersonsFormComponent } from '../persons-form/persons-form.component';
-import { DatePipe} from "@angular/common";
+import { PersonListItemComponent } from "../person-list-item/person-list-item.component";
 
 @Component({
     selector: 'app-persons',
@@ -9,9 +9,9 @@ import { DatePipe} from "@angular/common";
     styleUrls: ['./person-list.component.scss'],
     standalone: true,
     imports: [
-      PersonsFormComponent,
-      DatePipe
-    ]
+    PersonsFormComponent,
+    PersonListItemComponent
+]
 })
 export class PersonListComponent implements OnInit {
   private readonly personService = inject(PersonService);
@@ -28,7 +28,4 @@ export class PersonListComponent implements OnInit {
     */
   }
 
-  deletePerson(id: number) {
-    this.personService.deletePerson(id);
-  }
 }
