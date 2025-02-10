@@ -9,9 +9,9 @@ import { PersonListItemComponent } from "../person-list-item/person-list-item.co
     styleUrls: ['./person-list.component.scss'],
     standalone: true,
     imports: [
-    PersonsFormComponent,
-    PersonListItemComponent
-]
+      PersonsFormComponent,
+      PersonListItemComponent
+    ]
 })
 export class PersonListComponent implements OnInit {
   private readonly personService = inject(PersonService);

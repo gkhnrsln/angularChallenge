@@ -61,6 +61,16 @@ export class PersonService {
     }
   }
 
+  getPerson(id: number): Observable<Person | null> {
+    const storedDate = sessionStorage.getItem('persons');
+    if (storedDate) {
+      const persons = JSON.parse(storedDate);
+      const person = persons.find((p: { id: number; })  => p.id === id);
+      return of(person);
+    }
+    return of(null);
+  }
+
   deletePerson(id: number) {
     const storedDate = sessionStorage.getItem('persons');
     if (storedDate) {

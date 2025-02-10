@@ -1,1 +1,83 @@
-<p>person-details works!</p>
+<h1 class="mt-5"> Details of Person </h1>
+
+<button class="btn btn-primary" routerLink="/persons"><i class="bi bi-arrow-return-left"></i> Back to persons</button>
+
+@if (person$ | async; as person) {
+    <section>
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="../../assets/profile.jpg" alt="avatar" style="width: 250px;">
+                  <h5 class="my-3"> {{ person.firstName }} {{ person.lastName }}</h5>
+                  <p class="text-muted mb-1">{{ person.profession }}</p>
+                  <p class="text-muted mb-4">{{ person.adress }}</p>
+                  <div class="d-flex justify-content-center mb-2">
+                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Follow</button>
+                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Message</button>
+                  </div>
+                </div>
+              </div>
+     
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ person.firstName }} {{ person.lastName }}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ person.mail }}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ person.phone }}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Birthday</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ person.birthday | date }}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Address</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{person.adress?.city}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <a href="https://www.freepik.com/free-vector/man-profile-account-picture_137411837.htm#fromView=keyword&page=1&position=3&uuid=a3cb98f4-038c-40a3-9d60-5b75cf9e2724&query=Profile">Image by gstudioimagen on Freepik</a>
+} @else {
+    <p>Person not found</p>
+}
+

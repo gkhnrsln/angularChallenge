@@ -3,7 +3,10 @@
     "id": 1,
     "firstName": "Joy",
     "lastName": "Dare",
-    "birthday": "1987-12-21T00:00:00+00:00"
+    "birthday": "1987-12-21T00:00:00+00:00",
+    "mail": "sample@gmail.com",
+    "phone": "0123456679",
+    "profession": "CEO"
   },
   {
     "id": 2,
