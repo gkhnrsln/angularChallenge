@@ -21,9 +21,11 @@ export class PersonsFormComponent {
 
   constructor() {
     this.personForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      birthday: ['', [Validators.required, birthdayValidator()]]
+      firstName: ['John', Validators.required],
+      lastName: ['Doe', Validators.required],
+      birthday: ['', [Validators.required, birthdayValidator()]],
+      mail: ['example@abc.com', Validators.email],
+      phone: ['+0123456789'],
     });
   }
 
@@ -33,7 +35,9 @@ export class PersonsFormComponent {
         id: Date.now(),
         firstName: this.personForm.value.firstName,
         lastName: this.personForm.value.lastName,
-        birthday: this.personForm.value.birthday
+        birthday: this.personForm.value.birthday,
+        mail: this.personForm.value.mail,
+        phone: this.personForm.value.phone
       };
       this.personService.addPerson(newPerson);
 
