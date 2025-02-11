@@ -1,4 +1,12 @@
 <h1 class="mt-5">{{title}}</h1>
+
+<button class="btn btn-primary" (click)="toggleModal()">Add New Person</button>
+@if (isModalOpen) {
+  <app-modal title="Add new Person" (close)="toggleModal()">
+    <app-persons-form></app-persons-form>
+  </app-modal>
+}
+
 @if (persons()) {
   <div class="container">
     <div class="left">
@@ -9,6 +17,8 @@
           <th>Firstname</th>
           <th>Lastname</th>
           <th>Birthday</th>
+          <th>Mail</th>
+          <th>Phone</th>
           <th>Action</th>
         </tr>
         </thead>
@@ -18,9 +28,6 @@
           }
         </tbody>
       </table>
-    </div>
-    <div class="right">
-      <app-persons-form></app-persons-form>
     </div>
   </div>  
 }

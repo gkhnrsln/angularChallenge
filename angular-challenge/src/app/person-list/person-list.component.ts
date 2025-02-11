@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { PersonService } from "../shared/service/person.service";
 import { PersonsFormComponent } from '../persons-form/persons-form.component';
 import { PersonListItemComponent } from "../person-list-item/person-list-item.component";
+import { ModalComponent } from "../modal/modal.component";
 
 @Component({
     selector: 'app-persons',
@@ -9,6 +10,7 @@ import { PersonListItemComponent } from "../person-list-item/person-list-item.co
     styleUrls: ['./person-list.component.scss'],
     standalone: true,
     imports: [
+      ModalComponent,
       PersonsFormComponent,
       PersonListItemComponent
     ]
@@ -17,6 +19,7 @@ export class PersonListComponent implements OnInit {
   private readonly personService = inject(PersonService);
   title = 'Table of Persons';
   persons = this.personService.persons;
+  isModalOpen = false;
 
   ngOnInit(): void {
     /*
@@ -28,4 +31,7 @@ export class PersonListComponent implements OnInit {
     */
   }
 
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
+  }
 }
