@@ -7,7 +7,7 @@
     <td>{{ person.phone }}</td>
     <td>
         <button class="btn btn-primary" [routerLink]="person.id.toString()">View</button> &nbsp; 
-        <button class="btn btn-outline-primary" [routerLink]="['/edit', person.id]">Edit</button> &nbsp; 
+        <button class="btn btn-outline-primary" [routerLink]="['/admin/edit', person.id]">Edit</button> &nbsp; 
         <button class="btn btn-danger" (click)="deletePerson(person.id)">Delete</button>
     </td>
 }
