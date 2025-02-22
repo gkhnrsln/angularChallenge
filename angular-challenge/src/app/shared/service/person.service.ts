@@ -61,14 +61,14 @@ export class PersonService {
     }
   }
 
-  getPerson(id: number): Observable<Person | null> {
+  getPerson(id: number): Observable<Person> {
     const storedDate = sessionStorage.getItem('persons');
     if (storedDate) {
       const persons = JSON.parse(storedDate);
       const person = persons.find((p: { id: number; })  => p.id === id);
       return of(person);
     }
-    return of(null);
+    return of();
   }
 
   deletePerson(id: number) {
@@ -78,6 +78,19 @@ export class PersonService {
       for(let i = 0; i < persons.length; i++) {
         if(persons[i].id == id) {
           persons.splice(i, 1);
+        }
+      }
+      this.updateSessionStorage(persons);
+    }
+  }
+
+  updatePerson(person: Person) {
+    const storedDate = sessionStorage.getItem('persons');
+    if (storedDate) {
+      const persons = JSON.parse(storedDate);
+      for(let i = 0; i < persons.length; i++) {
+        if(persons[i].id == person.id) {
+          persons[i] = person;
         }
       }
       this.updateSessionStorage(persons);

@@ -1,7 +1,6 @@
-import {Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import {Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Person } from "../model/person";
-import { PersonService } from '../shared/service/person.service';
 import { birthdayValidator } from '../shared/validators/birthdayValidator';
 
 @Component({
@@ -14,34 +13,52 @@ import { birthdayValidator } from '../shared/validators/birthdayValidator';
     ]
 })
 export class PersonsFormComponent {
-  private readonly personService = inject(PersonService);
-  private readonly formBuilder = inject(FormBuilder);
-
-  personForm: FormGroup;
-
-  constructor() {
-    this.personForm = this.formBuilder.group({
-      firstName: ['John', Validators.required],
-      lastName: ['Doe', Validators.required],
-      birthday: ['', [Validators.required, birthdayValidator()]],
-      mail: ['example@abc.com', Validators.email],
-      phone: ['+0123456789'],
-    });
+  @Input() person?: Person;
+  @Output() submitPerson = new EventEmitter<Person>();
+  
+  ngOnChanges() :void {
+    if (this.person) {
+      this.setFormValues(this.person);
+    }
   }
 
-  onSubmit() {
-    if (this.personForm.valid) {
-      const newPerson: Person = {
-        id: Date.now(),
-        firstName: this.personForm.value.firstName,
-        lastName: this.personForm.value.lastName,
-        birthday: this.personForm.value.birthday,
-        mail: this.personForm.value.mail,
-        phone: this.personForm.value.phone
-      };
-      this.personService.addPerson(newPerson);
+  personForm = new FormGroup({
+      firstName: new FormControl('John', {
+        nonNullable: true,
+        validators: Validators.required
+      }),
+      lastName: new FormControl('Doe', {
+        nonNullable: true,
+        validators: Validators.required
+      }),
+      birthday: new FormControl(new Date(), {
+        nonNullable: true,
+        validators: [
+          Validators.required, 
+          birthdayValidator()
+        ]
+      }),
+      mail: new FormControl('example@abc.com', {
+        nonNullable: true,
+        validators: Validators.email
+      }),
+      phone: new FormControl('+0123456789', {
+        nonNullable: true
+      }),
+    });
+  
 
-      this.personForm.reset();
-    }
+  onSubmit() {
+    const formValue = this.personForm.getRawValue();
+
+    const newPerson: Person = {
+      id: this.person?.id ?? Date.now(),
+      ...formValue
+    };
+    this.submitPerson.emit(newPerson);
+  }
+
+  private setFormValues(person: Person) {
+    this.personForm.patchValue(person);
   }
 }

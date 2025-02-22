@@ -1,11 +1,5 @@
 <h1 class="mt-5">{{title}}</h1>
-
-<button class="btn btn-primary" (click)="toggleModal()">Add New Person</button>
-@if (isModalOpen) {
-  <app-modal title="Add new Person" (close)="toggleModal()">
-    <app-persons-form></app-persons-form>
-  </app-modal>
-}
+<button class="btn btn-primary" [routerLink]="['/create']">Add New Person</button>
 
 @if (persons()) {
   <div class="container">

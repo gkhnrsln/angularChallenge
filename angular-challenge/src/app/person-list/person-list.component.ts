@@ -1,8 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PersonService } from "../shared/service/person.service";
-import { PersonsFormComponent } from '../persons-form/persons-form.component';
 import { PersonListItemComponent } from "../person-list-item/person-list-item.component";
-import { ModalComponent } from "../modal/modal.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-persons',
@@ -10,28 +9,13 @@ import { ModalComponent } from "../modal/modal.component";
     styleUrls: ['./person-list.component.scss'],
     standalone: true,
     imports: [
-      ModalComponent,
-      PersonsFormComponent,
+      RouterLink,
       PersonListItemComponent
     ]
 })
-export class PersonListComponent implements OnInit {
+export class PersonListComponent {
   private readonly personService = inject(PersonService);
   title = 'Table of Persons';
   persons = this.personService.persons;
-  isModalOpen = false;
 
-  ngOnInit(): void {
-    /*
-    this.persons$.subscribe(loadedPersons => {
-      this.persons = loadedPersons
-        .filter((person: Person) => person.firstName)
-        .sort((a: Person, b: Person) => a.firstName.localeCompare(b.firstName));
-    });
-    */
-  }
-
-  toggleModal() {
-    this.isModalOpen = !this.isModalOpen;
-  }
 }
