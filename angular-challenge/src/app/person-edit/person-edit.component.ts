@@ -28,7 +28,6 @@ export class PersonEditComponent {
 
   update(person: Person) {
     this.personService.updatePerson(person);
-    console.log(person)
     this.router.navigate(['/persons', person.id]);
   }
 }
