@@ -58,11 +58,52 @@ func GetPersonByID(c *gin.Context) {
 
 func PostPerson(c *gin.Context) {
 	var newPerson model.Person
-
 	if err := c.BindJSON(&newPerson); err != nil {
 		return
 	}
 
 	persons = append(persons, newPerson)
 	c.IndentedJSON(http.StatusCreated, newPerson)
+}
+
+func DeletePerson(c *gin.Context) {
+	id := c.Param("id")
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "invalid ID"})
+		return
+	}
+
+	for i, p := range persons {
+		if p.ID == idInt {
+			persons = append(persons[:i], persons[i+1:]...)
+			c.IndentedJSON(http.StatusOK, gin.H{"message": "person deleted"})
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "person not found"})
+}
+
+func UpdatePerson(c *gin.Context) {
+	id := c.Param("id")
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "invalid ID"})
+		return
+	}
+
+	var updatedPerson model.Person
+	if err := c.BindJSON(&updatedPerson); err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "invalid JSON"})
+		return
+	}
+
+	for i, p := range persons {
+		if p.ID == idInt {
+			persons[i] = updatedPerson
+			c.IndentedJSON(http.StatusOK, updatedPerson)
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "person not found"})
 }

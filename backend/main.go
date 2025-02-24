@@ -23,6 +23,7 @@ func main() {
 	router.GET("/persons", controllers.GetPersons)
 	router.GET("/persons/:id", controllers.GetPersonByID)
 	router.POST("/persons", controllers.PostPerson)
-
+	router.PUT("/persons/:id", controllers.UpdatePerson)
+	router.DELETE("/persons/:id", controllers.DeletePerson)
 	router.Run("localhost:8080")
 }
