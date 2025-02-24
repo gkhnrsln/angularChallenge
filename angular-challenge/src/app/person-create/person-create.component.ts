@@ -15,7 +15,8 @@ export class PersonCreateComponent {
     private readonly router = inject(Router);
   
   create(person: Person) {
-    this.personService.addPerson(person);
-    this.router.navigate(['/persons', person.id]);
+    this.personService.addPerson(person).subscribe(() => {
+      this.router.navigate(['/persons', person.id]);
+    });
   }
 }

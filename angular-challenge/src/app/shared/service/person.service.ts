@@ -1,110 +1,18 @@
-import { inject, Injectable, signal, Signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Observable, of} from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { catchError, map} from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Person } from 'src/app/model/person';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonService {
-  private readonly dataUrl = './assets/persons.json';
+  private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
-  private readonly _persons = signal<Person[]>([]);
-
-  get persons(): Signal<Person[]> {
-    return this._persons.asReadonly();
-  }
-
-  constructor() {
-    this.loadInitialData();
-  }
-
-  private loadInitialData() {
-    const storedData = sessionStorage.getItem('persons');
-  
-    if (storedData) {
-      this._persons.set(JSON.parse(storedData));
-    } else {
-      this.http.get<Person[]>(this.dataUrl).subscribe(persons => {
-        this.updateSessionStorage(persons);
-      });
-    }
-  }
-
-  getPersons(): Observable<Person[]> {
-    const storedDate = sessionStorage.getItem('persons');
-    if (storedDate) {
-      const persons = JSON.parse(storedDate);
-      this._persons.set(persons);
-      return of(persons);
-    } else {  
-      return this.http.get<Person[]>(this.dataUrl).pipe(
-        map(persons => {
-          this.updateSessionStorage(persons);
-          return persons;
-        }),
-        catchError(err => {
-          console.error(err);
-          return of([]);
-        })
-      )
-    };
-  }
-
-  addPerson(person: Person) {
-    const storedDate = sessionStorage.getItem('persons');
-    if (storedDate) {
-      const persons = JSON.parse(storedDate);
-      persons.push(person);
-      this.updateSessionStorage(persons);
-    }
-  }
-
-  getPerson(id: number): Observable<Person> {
-    const storedDate = sessionStorage.getItem('persons');
-    if (storedDate) {
-      const persons = JSON.parse(storedDate);
-      const person = persons.find((p: { id: number; })  => p.id === id);
-      return of(person);
-    }
-    return of();
-  }
-
-  deletePerson(id: number) {
-    const storedDate = sessionStorage.getItem('persons');
-    if (storedDate) {
-      const persons = JSON.parse(storedDate);
-      for(let i = 0; i < persons.length; i++) {
-        if(persons[i].id == id) {
-          persons.splice(i, 1);
-        }
-      }
-      this.updateSessionStorage(persons);
-    }
-  }
-
-  updatePerson(person: Person) {
-    const storedDate = sessionStorage.getItem('persons');
-    if (storedDate) {
-      const persons = JSON.parse(storedDate);
-      for(let i = 0; i < persons.length; i++) {
-        if(persons[i].id == person.id) {
-          persons[i] = person;
-        }
-      }
-      this.updateSessionStorage(persons);
-    }
-  }
-
-  private updateSessionStorage(persons: Person[]): void {
-    sessionStorage.setItem('persons', JSON.stringify(persons));
-    this._persons.set(persons);
-  }
-
-
-  /* 
-  getAll(): Observable<Person[]> {
+ 
+  getAllPersons(): Observable<Person[]> {
     return this.http.get<Person[]>(`${this.apiUrl}/persons`).pipe(
       catchError(err => {
         console.error(err);
@@ -112,21 +20,20 @@ export class PersonService {
       })
     );
   }
-  
-  getSingle(id: string): Observable<Person> {
+
+  getPerson(id: number): Observable<Person> {
     return this.http.get<Person>(`${this.apiUrl}/persons/${id}`);
   }
 
-  remove(id: string): Observable<unknown> {
+  deletePerson(id: number): Observable<unknown> {
     return this.http.delete(`${this.apiUrl}/persons/${id}`);
   }
 
-  create(person: Person): Observable<Person> {
+  addPerson(person: Person): Observable<Person> {
     return this.http.post<Person>(`${this.apiUrl}/persons`, person);
   }
 
-  update(person: Person): Observable<Person> {
+  updatePerson(person: Person): Observable<Person> {
     return this.http.put<Person>(`${this.apiUrl}/persons/${person.id}`, person);
   }
-  */
 }
