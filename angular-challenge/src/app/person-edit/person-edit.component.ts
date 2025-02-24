@@ -27,7 +27,8 @@ export class PersonEditComponent {
   }
 
   update(person: Person) {
-    this.personService.updatePerson(person);
-    this.router.navigate(['/persons', person.id]);
+    this.personService.updatePerson(person).subscribe(() => {
+      this.router.navigate(['/persons', person.id]);
+    });
   }
 }

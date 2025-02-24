@@ -17,11 +17,14 @@
         </tr>
         </thead>
         <tbody>
-          @for (person of persons(); track person.id) {
-            <tr app-person-list-item [person]="person"></tr>  
+          @for (person of persons(); track person.id) { 
+            <tr app-person-list-item [person]="person" (deleted)="removePerson($event)"></tr>  
           }
         </tbody>
       </table>
     </div>
   </div>  
+}
+@else {
+  No Persons available...
 }
