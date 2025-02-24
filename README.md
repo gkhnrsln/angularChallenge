@@ -1,5 +1,4 @@
-# angularChallenge
-Coding Challenge for a company
+# Simple-CRUD-Application
 
 **Demo**
-https://gkhnrsln.github.io/angularChallenge/
+https://gkhnrsln.github.io/Simple-CRUD-Application
