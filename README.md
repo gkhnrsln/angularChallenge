@@ -1,4 +1,3 @@
-=======
 # (WIP) Simple-CRUD-Application
 Made with:
 - Angular 19
