@@ -14,5 +14,5 @@ import { RouterOutlet } from '@angular/router';
     ]
 })
 export class AppComponent {
-  title = 'Angular Challenge';
+  title = 'Simple CRUD Application';
 }

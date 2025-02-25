@@ -25,7 +25,6 @@ describe('PersonService', () => {
     expect(service).toBeTruthy();
   });
 
-
   it('should retrieve persons from the API via GET', () => {
     const dummyPersons: Person[] = [
       { id: 1, firstName: 'John', lastName: 'Doe', birthday: new Date()},
