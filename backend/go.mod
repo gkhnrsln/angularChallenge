@@ -1,8 +1,10 @@
 module gkhnrsln/web-service-gin
 
-go 1.22.1
+go 1.24
 
 require github.com/gin-gonic/gin v1.10.0
+
+require github.com/kr/text v0.2.0 // indirect
 
 require (
 	github.com/bytedance/sonic v1.12.6 // indirect
