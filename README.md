@@ -1,5 +1,3 @@
-**Demo**
-https://gkhnrsln.github.io/angularChallenge/
 =======
 # (WIP) Simple-CRUD-Application
 Made with:
