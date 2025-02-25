@@ -2,7 +2,7 @@
 Made with:
 - Angular 19
 - Bootstrap 5
-- Go 1.22.1
+- Go 1.24
 
 ## Demo
 Live Demo on GitHub Pages: https://gkhnrsln.github.io/Simple-CRUD-Application (Only Frontend)
