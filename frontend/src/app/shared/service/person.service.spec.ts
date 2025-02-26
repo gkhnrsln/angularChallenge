@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 
 describe('PersonService', () => {
   let service: PersonService;
-  let httpTesting: HttpTestingController;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,7 +17,7 @@ describe('PersonService', () => {
         provideHttpClientTesting(),
       ]
     });
-    httpTesting = TestBed.inject(HttpTestingController);
+    httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(PersonService);
   });
 
@@ -36,8 +36,12 @@ describe('PersonService', () => {
       expect(persons).toEqual(dummyPersons);
     })
 
-    const request = httpTesting.expectOne(`${environment.apiUrl}/persons`);
+    const request = httpMock.expectOne(`${environment.apiUrl}/persons`);
     expect(request.request.method).toBe('GET');
     request.flush(dummyPersons);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 });
