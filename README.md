@@ -4,6 +4,22 @@ Made with:
 - Bootstrap 5
 - Go 1.24
 
+## Start Frontend and Backend
+
+This project consists of an Angular frontend and a Go-Gin backend. To simplify the startup process, a script (`run.sh`) is provided.
+
+### Prerequisites
+
+Make sure you have the following installed on your system:
+
+- [Node.js and Angular CLI](https://angular.io/cli)
+- [Go](https://go.dev/)
+- [Bash](https://www.gnu.org/software/bash/)
+
+### How to Run
+...todo
+
+
 ## Demo
 Live Demo on GitHub Pages: https://gkhnrsln.github.io/Simple-CRUD-Application (Only Frontend)
 ### Screenshot

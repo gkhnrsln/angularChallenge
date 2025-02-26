@@ -1,6 +1,7 @@
 import {Routes} from "@angular/router";
-import { PersonCreateComponent } from "../person-create/person-create.component";
-import { PersonEditComponent } from "../person-edit/person-edit.component";
+import { PersonCreateComponent } from "../admin/person-create/person-create.component";
+import { PersonEditComponent } from "../admin/person-edit/person-edit.component";
+
 
 export const ADMIN_ROUTES: Routes = [
   {

@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { PersonService } from '../shared/service/person.service';
 import { map, Observable, switchMap } from 'rxjs';
-import { Person } from '../model/person';
+import { Person } from 'src/app/model/person';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { PersonsFormComponent } from '../persons-form/persons-form.component';
+import { PersonFormComponent } from '../person-form/person-form.component';
+import { PersonService } from 'src/app/shared/service/person.service';
 
 @Component({
   selector: 'app-person-edit',
-  imports: [AsyncPipe, PersonsFormComponent, RouterLink],
+  imports: [AsyncPipe, PersonFormComponent, RouterLink],
   templateUrl: './person-edit.component.html',
   styleUrl: './person-edit.component.scss'
 })
