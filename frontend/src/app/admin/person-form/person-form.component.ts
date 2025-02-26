@@ -1,18 +1,18 @@
 import {Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { Person } from "../model/person";
-import { birthdayValidator } from '../shared/validators/birthdayValidator';
+import { Person } from 'src/app/model/person';
+import { birthdayValidator } from 'src/app/shared/validators/birthdayValidator';
 
 @Component({
-    selector: 'app-persons-form',
-    templateUrl: './persons-form.component.html',
-    styleUrls: ['./persons-form.component.scss'],
+    selector: 'app-person-form',
+    templateUrl: './person-form.component.html',
+    styleUrls: ['./person-form.component.scss'],
     standalone: true,
     imports: [
       ReactiveFormsModule
     ]
 })
-export class PersonsFormComponent {
+export class PersonFormComponent {
   @Input() person?: Person;
   @Output() submitPerson = new EventEmitter<Person>();
   

@@ -1,18 +1,18 @@
 import { Component, inject } from '@angular/core';
-import { PersonService } from '../shared/service/person.service';
-import { Person } from '../model/person';
 import { Router, RouterLink } from '@angular/router';
-import { PersonsFormComponent } from '../persons-form/persons-form.component';
+import { PersonFormComponent } from '../person-form/person-form.component';
+import { PersonService } from 'src/app/shared/service/person.service';
+import { Person } from 'src/app/model/person';
 
 @Component({
   selector: 'app-person-create',
-  imports: [PersonsFormComponent, RouterLink],
+  imports: [PersonFormComponent, RouterLink],
   templateUrl: './person-create.component.html',
   styleUrl: './person-create.component.scss'
 })
 export class PersonCreateComponent {
   private readonly personService = inject(PersonService);
-    private readonly router = inject(Router);
+  private readonly router = inject(Router);
   
   create(person: Person) {
     this.personService.addPerson(person).subscribe(() => {
